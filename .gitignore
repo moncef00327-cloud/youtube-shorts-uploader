@@ -6,6 +6,9 @@ token.json
 # ملفات الإخراج
 upload_report.json
 install_log.txt
+generated/
+comfyui_api_workflow.json
+pipeline_report.json
 
 # ملفات النشر المحلية (لا تُرفع لـ GitHub)
 GITHUB_SETUP_GUIDE.md

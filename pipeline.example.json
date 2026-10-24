@@ -1,0 +1,88 @@
+{
+  "comfyui_url": "http://127.0.0.1:8188",
+  "workflow_file": "comfyui_api_workflow.json",
+  "output_dir": "generated",
+  "uploader_script": "upload_shorts.py",
+  "nodes": {
+    "prompt": {
+      "id": "6",
+      "input": "text"
+    },
+    "output": {
+      "id": "9"
+    },
+    "seed": {
+      "id": "3",
+      "input": "seed"
+    },
+    "width": {
+      "id": "5",
+      "input": "width"
+    },
+    "height": {
+      "id": "5",
+      "input": "height"
+    },
+    "frames": {
+      "id": "5",
+      "input": "length"
+    }
+  },
+  "generation": {
+    "seed": 271024,
+    "width": 480,
+    "height": 832,
+    "frames": 241
+  },
+  "render": {
+    "enabled": true,
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "duration_seconds": 15,
+    "ffmpeg": "ffmpeg",
+    "ffprobe": "ffprobe"
+  },
+  "videos": [
+    {
+      "id": "sand_castle",
+      "file": "sand_castle.mp4",
+      "prompt": "Original bright 3D children's animation, vertical portrait composition. The same cute toddler boy with short blonde hair and a blue shirt happily scoops sand and builds a small sandcastle in a sunny sandbox. Gentle clear movements, cheerful colors, friendly rounded character design, uncluttered background, no text, no logos.",
+      "title": "Fun Sandbox Time! | Nursery Rhymes",
+      "description": "A cheerful sandbox adventure for little learners.",
+      "tags": ["sand castle", "toddler", "3d animation", "nursery rhymes"]
+    },
+    {
+      "id": "balloons",
+      "file": "balloons.mp4",
+      "prompt": "Original bright 3D children's animation, vertical portrait composition. The same cute toddler boy with short blonde hair and a blue shirt holds colorful party balloons in a green garden. Gentle clear movements, cheerful colors, friendly rounded character design, uncluttered background, no text, no logos.",
+      "title": "Colorful Balloons in the Garden | Kids Songs",
+      "description": "A bright garden full of colorful balloons.",
+      "tags": ["balloons", "garden", "toddler", "kids songs"]
+    },
+    {
+      "id": "elephant",
+      "file": "elephant.mp4",
+      "prompt": "Original bright 3D children's animation, vertical portrait composition. The same cute toddler boy with short blonde hair and a blue shirt plays and dances beside a friendly yellow baby elephant in a cheerful nursery. Gentle clear movements, cheerful colors, friendly rounded character design, uncluttered background, no text, no logos.",
+      "title": "Dancing with a Baby Elephant | Nursery Rhymes",
+      "description": "A friendly elephant joins a happy dance.",
+      "tags": ["elephant", "dancing", "toddler", "nursery rhymes"]
+    },
+    {
+      "id": "painting",
+      "file": "painting.mp4",
+      "prompt": "Original bright 3D children's animation, vertical portrait composition. The same cute toddler boy with short blonde hair and a blue shirt sits safely on the floor and paints with colorful finger paints on paper. Gentle clear movements, cheerful colors, friendly rounded character design, uncluttered background, no text, no logos.",
+      "title": "Finger Painting Fun | Kids Learning",
+      "description": "A colorful and creative painting activity.",
+      "tags": ["painting", "colors", "toddler", "kids learning"]
+    },
+    {
+      "id": "helmet",
+      "file": "helmet.mp4",
+      "prompt": "Original bright 3D children's animation, vertical portrait composition. The same cute toddler boy with short blonde hair and a blue shirt wears a properly fitted yellow construction helmet and looks around a safe, bright play area. Gentle clear movements, cheerful colors, friendly rounded character design, uncluttered background, no text, no logos.",
+      "title": "Curious Builder in a Yellow Helmet | Toddler Learning",
+      "description": "A curious little builder explores a safe play area.",
+      "tags": ["helmet", "construction", "curiosity", "toddler"]
+    }
+  ]
+}

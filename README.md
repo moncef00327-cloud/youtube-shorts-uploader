@@ -187,3 +187,55 @@ schtasks /delete /tn "YouTube Shorts Daily Upload" /f
 
 الكود في هذا المشروع مرخص بموجب **GNU GPLv3**.
 أداة [youtube-upload](https://github.com/tokland/youtube-upload) مرخصة GPLv3 أيضاً.
+
+---
+
+## خط إنتاج المقاطع عبر أدوات مفتوحة المصدر
+
+يستخدم `pipeline.py` واجهة ComfyUI لإرسال المشاهد، حفظ الفيديو الناتج، وإنشاء
+ملف إعداد متوافق مع `upload_shorts.py`. أداة ComfyUI مرخصة GPL-3.0؛ نموذج Wan2.1
+مرخص Apache-2.0. الأوزان كبيرة والتوليد يحتاج GPU مناسبًا؛ بطاقة Quadro P500
+ذات 2GB VRAM غير كافية لتشغيل نموذج Wan2.1 T2V-1.3B (المتطلبات المعلنة تقارب
+8.19GB VRAM).
+
+### التجهيز
+
+1. ثبّت ComfyUI على جهاز مزود بـ GPU مناسب، وثبّت نموذج فيديو متوافقًا، مثل Wan2.1.
+2. أنشئ workflow في ComfyUI يتضمن عقدة نص، عقدة عدد الإطارات، عقدتي القياس، وعقدة
+  حفظ فيديو MP4. مثال الإعداد يطلب 480×832 و241 إطارًا؛ عدّل قيم العقد لتناسب
+  النموذج. يجب أن ينتج workflow مقطعًا لا يقل عن 15 ثانية.
+3. صدّر الـ workflow بصيغة **API format** إلى `comfyui_api_workflow.json`.
+4. انسخ `pipeline.example.json` إلى `pipeline.json` واضبط `comfyui_url` ومعرّفات
+  عقد النص والإخراج والبذرة والإطارات والقياس بما يطابق workflow المُصدّر. ثبّت
+  FFmpeg وffprobe على PATH لتحويل الناتج إلى 1080×1920، 30fps، و15 ثانية. لا ترفع
+  ملف workflow المحلي أو الفيديوهات إلى GitHub.
+
+### التشغيل
+
+تحقق من الإعداد دون إرسال طلب إلى ComfyUI:
+
+```powershell
+python pipeline.py --config pipeline.json --dry-run
+```
+
+ولّد المقاطع الخمسة واحفظها في `generated/` مع manifest وتقرير:
+
+```powershell
+python pipeline.py --config pipeline.json
+```
+
+الرفع غير مفعّل افتراضيًا. ارفع كـ unlisted بعد مراجعة الملفات:
+
+```powershell
+python pipeline.py --config pipeline.json --upload --privacy unlisted
+```
+
+النشر العام يتطلب تأكيدًا صريحًا:
+
+```powershell
+python pipeline.py --config pipeline.json --upload --privacy public --confirm-public
+```
+
+يُحفظ manifest وتقرير التنفيذ داخل `generated/`. الإفصاح عن المحتوى الاصطناعي
+يظل إعدادًا يدويًا في YouTube Studio؛ لا يضبطه YouTube Data API المستخدم هنا.
+استخدم واجهة ComfyUI على شبكة موثوقة فقط، ولا تعرضها مباشرةً للإنترنت.
