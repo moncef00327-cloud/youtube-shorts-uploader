@@ -8,10 +8,40 @@ from types import SimpleNamespace
 from unittest.mock import patch
 from urllib.parse import urlparse
 
+from control_panel import build_upload_manifest
 from pipeline import PipelineError, build_workflow, generate_scene, render_video, video_artifacts
 
 
 class PipelineTests(unittest.TestCase):
+    def test_upload_manifest_uses_selected_privacy_and_absolute_file(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            video_path = Path(temp_dir) / "clip.mp4"
+            video_path.write_bytes(b"video")
+            manifest = build_upload_manifest(
+                {
+                    "videos": [
+                        {
+                            "id": "scene",
+                            "file": str(video_path),
+                            "title": "A scene",
+                            "description": "Description",
+                            "tags": ["kids"],
+                        }
+                    ]
+                },
+                "unlisted",
+            )
+        self.assertEqual(manifest["videos"][0]["privacy"], "unlisted")
+        self.assertEqual(manifest["videos"][0]["file"], str(video_path.resolve()))
+        self.assertTrue(manifest["videos"][0]["made_for_kids"])
+
+    def test_upload_manifest_rejects_missing_video(self):
+        with self.assertRaisesRegex(ValueError, "ملف الفيديو غير موجود"):
+            build_upload_manifest(
+                {"videos": [{"id": "missing", "file": "missing.mp4", "title": "Missing"}]},
+                "unlisted",
+            )
+
     def test_build_workflow_updates_prompt_seed_and_size(self):
         workflow = {
             "1": {"inputs": {"text": "old prompt"}},

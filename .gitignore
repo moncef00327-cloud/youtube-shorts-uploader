@@ -9,6 +9,7 @@ install_log.txt
 generated/
 comfyui_api_workflow.json
 pipeline_report.json
+pipeline.local.json
 
 # ملفات النشر المحلية (لا تُرفع لـ GitHub)
 GITHUB_SETUP_GUIDE.md
