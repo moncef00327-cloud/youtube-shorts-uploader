@@ -1,0 +1,24 @@
+# أسرار لا يجب رفعها إلى git
+client_secrets.json
+token.json
+*.token.json
+
+# ملفات الإخراج
+upload_report.json
+install_log.txt
+
+# ملفات النشر المحلية (لا تُرفع لـ GitHub)
+GITHUB_SETUP_GUIDE.md
+publish.bat
+publish.ps1
+
+# بيئات Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ملفات النظام
+.DS_Store
+Thumbs.db
